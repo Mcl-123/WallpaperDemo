@@ -18,6 +18,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,18 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         for (int wallpaper : wallpapers) {
             ImageView imageView = new ImageView(this);
-            imageView.setBackgroundColor(getResources().getColor(R.color.white));
-
-            Bitmap originBitmap = BitmapFactory.decodeResource(getResources(), wallpaper);
-
-            int radio = 8;
-            Bitmap result = Bitmap.createBitmap(originBitmap.getWidth() / radio, originBitmap.getHeight() / radio, Bitmap.Config.RGB_565);
-            Canvas canvas = new Canvas(result);
-            RectF rectF = new RectF(0, 0, originBitmap.getWidth() / radio, originBitmap.getHeight() / radio);
-            canvas.drawBitmap(originBitmap, null, rectF, null);
-
-            imageView.setBackgroundColor(getResources().getColor(R.color.black));
-            imageView.setImageBitmap(result);
+            Glide.with(this).load(wallpaper).into(imageView);
             views.add(imageView);
         }
 
